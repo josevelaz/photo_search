@@ -25,8 +25,7 @@ const IndexPage = () => {
         {
           method: "GET",
           headers: {
-            Authorization:
-              "Client-ID uLDPiiX2PrMJxt-F94YQWQvwtp5mxvlt3NxiV62ECwg",
+            Authorization: process.env.GATSBY_UNSPLASH_API_KEY,
           },
         }
       )
