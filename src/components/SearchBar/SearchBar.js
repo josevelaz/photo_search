@@ -69,7 +69,7 @@ const Container = styled.div`
   padding: 0.5em 1em;
   position: fixed;
   z-index: 10;
-  top: 2.5em;
+  top: 1em;
   box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.35);
 `
 
