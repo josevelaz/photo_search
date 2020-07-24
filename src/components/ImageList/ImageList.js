@@ -7,38 +7,56 @@ const ImageList = props => {
   if (data)
     return (
       <Container>
-        {data.map(({ urls, links }) => (
+        {data.map(({ urls, links, description }) => (
           <Inner href={links.html} target="_blank" css={sizeSelector()}>
-            <Bottom src={urls.raw} />
+            <Bottom src={urls.regular} alt={description} />
           </Inner>
         ))}
         <Inner />
       </Container>
     )
-  else return null
+  else
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <h2>
+          There are currently no images. Try using the search bar to find
+          something!
+        </h2>
+      </div>
+    )
 }
 
 function sizeSelector() {
   let size = [
     // horizontal
     css`
-      grid-column: span 4;
+      grid-column: span 3;
       grid-row: span 2;
     `,
     // Vertical
     css`
       grid-row: span 2;
-      grid-column: span 4;
+      grid-column: span 3;
     `,
     //Big
     css`
-      grid-column: span 4;
-      grid-row: span 4;
+      grid-column: span 3;
+      grid-row: span 3;
     `,
     // Single
     css`
       grid-column: span 2;
       grid-row: span 2;
+    `,
+    css`
+      grid-column: span 1;
+      grid-row: span 1;
     `,
   ]
 
@@ -58,7 +76,7 @@ const Bottom = styled.img`
 
 const Container = styled.div`
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 30px;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   grid-auto-rows: 120px;
   grid-auto-flow: dense;
@@ -69,6 +87,12 @@ const Inner = styled.a`
   justify-content: center;
   align-items: center;
   font-size: 2em;
+  transition: 0.25s;
+  filter: grayscale(40%);
+  &:hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+  }
 `
 
 export default React.memo(ImageList)

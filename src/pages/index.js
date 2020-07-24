@@ -8,7 +8,7 @@ const IndexPage = () => {
   const [queryData, setQueryData] = useState(undefined)
   const [query, setQuery] = useState("")
 
-  const searchPhoto = async e => {
+  const searchPhoto = e => {
     e.preventDefault()
     fetchPhotos()
   }
@@ -18,9 +18,10 @@ const IndexPage = () => {
   }
 
   async function fetchPhotos() {
+    setLoading(true)
     try {
       const res = await fetch(
-        `https://api.unsplash.com/search/photos/?query=${query}`,
+        `https://api.unsplash.com/search/photos/?query=${query}&per_page=25`,
         {
           method: "GET",
           headers: {
@@ -31,7 +32,9 @@ const IndexPage = () => {
       )
       const { results } = await res.json()
       setQueryData(results)
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
       console.log(error)
     }
   }
@@ -55,7 +58,7 @@ const Screen = styled.div`
   flex: 1;
   align-items: center;
   justify-content: center;
-  padding-top: 100px;
+  padding: 100px 30px;
   // background-color: red;
 `
 
